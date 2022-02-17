@@ -9,12 +9,12 @@ public class TurretCtrl : MonoBehaviour
 
     void Start()
     {
-
+        tr = GetComponent<Transform>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Debug.DrawRay(ray.origin, ray.direction * 100.0f, Color.green);
     }
 }
