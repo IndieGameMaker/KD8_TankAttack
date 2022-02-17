@@ -9,7 +9,7 @@ public class Cannon : MonoBehaviour
 
     void Start()
     {
-        GetComponent<Rigidbody>().AddForce(Vector3.forward * speed);
+        GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * speed);
     }
 
     void OnCollisionEnter()
