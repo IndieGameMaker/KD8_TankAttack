@@ -70,8 +70,12 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("방 입장 완료 !!!");
 
+        Vector3 pos = new Vector3(Random.Range(-180, 180)
+                                  , 3.0f
+                                  , Random.Range(-180, 180));
+
         PhotonNetwork.Instantiate("Tank",
-                                  new Vector3(0, 2.0f, 0),
+                                  pos,
                                   Quaternion.identity,
                                   0);
     }
