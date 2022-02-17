@@ -4,17 +4,29 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class PhotonManager : MonoBehaviour
+public class PhotonManager : MonoBehaviourPunCallbacks
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+    // 게임버전
+    private readonly string gameVersion = "1.0";
+    // 유저명
+    public string userId = "LeeJaeHyun";
 
+    void Awake()
+    {
+        // 접속 정보 설정
+        PhotonNetwork.GameVersion = gameVersion;
+        PhotonNetwork.NickName = userId;
+
+        // 방장이 씬을 로딩했을 때 자동으로 씬이 호출되는 기능
+        PhotonNetwork.AutomaticallySyncScene = true;
+
+        // 포톤서버에 접속
+        PhotonNetwork.ConnectUsingSettings();
     }
 
-    // Update is called once per frame
-    void Update()
+    // 포톤 서버(클라우드)에 접속했을 때 호출되는 콜백
+    public override void OnConnectedToMaster()
     {
-
+        Debug.Log("서버접속완료");
     }
 }
