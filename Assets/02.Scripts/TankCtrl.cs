@@ -15,6 +15,8 @@ public class TankCtrl : MonoBehaviour
     private float v => Input.GetAxis("Vertical");
 
     public float speed = 20.0f;
+    public GameObject cannon;
+    public Transform firePos;
 
     // Start is called before the first frame update
     void Start()
