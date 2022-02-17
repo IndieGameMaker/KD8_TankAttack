@@ -44,6 +44,11 @@ public class TankCtrl : MonoBehaviour
         if (pv.IsMine == true)
         {
             Move();
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                Fire();
+            }
         }
     }
 
@@ -51,5 +56,11 @@ public class TankCtrl : MonoBehaviour
     {
         tr.Translate(Vector3.forward * Time.deltaTime * speed * v);
         tr.Rotate(Vector3.up * Time.deltaTime * 100.0f * h);
+    }
+
+    void Fire()
+    {
+        var obj = Instantiate(cannon, firePos.position, firePos.rotation);
+        Destroy(obj, 5.0f);
     }
 }
