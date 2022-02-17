@@ -70,9 +70,12 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("방 입장 완료 !!!");
 
-        Vector3 pos = new Vector3(Random.Range(-180, 180)
-                                  , 3.0f
-                                  , Random.Range(-180, 180));
+        List<Transform> points = new List<Transform>();
+        GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>(points);
+
+        int idx = Random.Range(1, points.Count);
+
+        Vector3 pos = points[idx].position;
 
         PhotonNetwork.Instantiate("Tank",
                                   pos,
