@@ -37,5 +37,14 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         Debug.Log("로비에 입장");
+
+        // 랜덤한 방에 입장 요청
+        PhotonNetwork.JoinRandomRoom();
+    }
+
+    // 랜덤조인 실패했을 때 호출되는 콜백
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        Debug.Log($"code={returnCode}, message={message}");
     }
 }
