@@ -63,4 +63,10 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         Debug.Log("방 생성됨 !");
     }
 
+    // 룸에 입장한 후 호출
+    public override void OnJoinedRoom()
+    {
+        Debug.Log("방 입장 완료 !!!");
+    }
+
 }
