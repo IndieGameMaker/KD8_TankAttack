@@ -47,7 +47,9 @@ public class TankCtrl : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                Fire();
+                Fire(); // 일반함수로 호출
+                // RPC 호출
+                pv.RPC("Fire", RpcTarget.Others);
             }
         }
     }
@@ -58,6 +60,12 @@ public class TankCtrl : MonoBehaviour
         tr.Rotate(Vector3.up * Time.deltaTime * 100.0f * h);
     }
 
+    /*
+        RPC (Remote Procedure Call) , RMI (Remote Method Invoke)
+    
+    */
+
+    [PunRPC]
     void Fire()
     {
         var obj = Instantiate(cannon, firePos.position, firePos.rotation);
