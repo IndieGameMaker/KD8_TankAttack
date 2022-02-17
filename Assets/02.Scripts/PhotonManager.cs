@@ -68,7 +68,10 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("방 입장 완료 !!!");
 
-        PhotonNetwork.Instantiate("Tank", new Vector3(0, 2.0f, 0), Quaternion.identity, 0);
+        PhotonNetwork.Instantiate("Tank",
+                                  new Vector3(0, 2.0f, 0),
+                                  Quaternion.identity,
+                                  0);
     }
 
 }

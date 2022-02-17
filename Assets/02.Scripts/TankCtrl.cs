@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class TankCtrl : MonoBehaviour
 {
     private Transform tr;
     private Rigidbody rb;
+    private PhotonView pv;
 
     private float h => Input.GetAxis("Horizontal");
     private float v => Input.GetAxis("Vertical");
@@ -15,6 +17,7 @@ public class TankCtrl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        pv = GetComponent<PhotonView>();
         tr = GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = new Vector3(0, -5.0f, 0);
@@ -23,7 +26,10 @@ public class TankCtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
+        if (pv.IsMine == true)
+        {
+            Move();
+        }
     }
 
     void Move()
