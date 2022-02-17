@@ -6,6 +6,8 @@ using Photon.Realtime;
 
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
+    // 04f2788e-b8a4-4cb2-b720-8a578d3509de
+
     // 게임버전
     private readonly string gameVersion = "1.0";
     // 유저명
