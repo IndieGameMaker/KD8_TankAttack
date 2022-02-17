@@ -1,3 +1,5 @@
+#pragma warning disable IDE0044, IDE0051, CS0108
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +12,7 @@ public class TankCtrl : MonoBehaviour
     private Rigidbody rb;
     private PhotonView pv;
     private CinemachineVirtualCamera vCam;
+    private AudioSource audio;
 
     private float h => Input.GetAxis("Horizontal");
     private float v => Input.GetAxis("Vertical");
@@ -17,6 +20,7 @@ public class TankCtrl : MonoBehaviour
     public float speed = 20.0f;
     public GameObject cannon;
     public Transform firePos;
+    public AudioClip fireSfx;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +29,7 @@ public class TankCtrl : MonoBehaviour
         pv = GetComponent<PhotonView>();
         tr = GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
+        audio = GetComponent<AudioSource>();
 
         if (pv.IsMine)
         {
@@ -68,6 +73,8 @@ public class TankCtrl : MonoBehaviour
     [PunRPC]
     void Fire()
     {
+        audio.PlayOneShot(fireSfx, 0.8f);
+
         var obj = Instantiate(cannon, firePos.position, firePos.rotation);
         Destroy(obj, 5.0f);
     }
