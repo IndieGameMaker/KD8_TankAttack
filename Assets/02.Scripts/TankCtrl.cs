@@ -52,9 +52,9 @@ public class TankCtrl : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                Fire(); // 일반함수로 호출
+                // Fire(); // 일반함수로 호출
                 // RPC 호출
-                pv.RPC("Fire", RpcTarget.Others);
+                pv.RPC("Fire", RpcTarget.AllViaServer);
             }
         }
     }
