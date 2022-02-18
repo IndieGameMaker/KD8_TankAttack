@@ -31,6 +31,16 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         PhotonNetwork.ConnectUsingSettings();
     }
 
+    void Start()
+    {
+        // 유저명 로딩
+        userId = PlayerPrefs.GetString("USER_ID", $"USER_{Random.Range(0, 1000):0000}");
+        userId_IF.text = userId;
+
+        // 유저명 설정
+        PhotonNetwork.NickName = userId;
+    }
+
     #region PUN_CALLBACK
 
     // 포톤 서버(클라우드)에 접속했을 때 호출되는 콜백
