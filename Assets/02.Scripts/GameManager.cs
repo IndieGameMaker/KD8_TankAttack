@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
+using TMPro;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPunCallbacks
 {
+    public TMP_Text roomInfo;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,9 +25,12 @@ public class GameManager : MonoBehaviour
                                   0);
     }
 
-    // Update is called once per frame
-    void Update()
+    void DisplayRoomInfo()
     {
+        Room currentRoom = PhotonNetwork.CurrentRoom;
 
+        string msg = $"{currentRoom.Name} (<color=#ff0000>{currentRoom.PlayerCount}</color>/<color=#00ff00>{currentRoom.MaxPlayers}</color>)";
+
+        roomInfo.text =
     }
 }
