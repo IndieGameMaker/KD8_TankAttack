@@ -8,6 +8,7 @@ using TMPro;
 public class GameManager : MonoBehaviourPunCallbacks
 {
     public TMP_Text roomInfo;
+    public TMP_Text chatMsgList;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +47,11 @@ public class GameManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LeaveRoom();
     }
 
+    public void ChatMessage(string msg)
+    {
+        chatMsgList.text += msg + "\n";
+    }
+
     // Client's Object Cleanup 호출되는 콜백
     public override void OnLeftRoom()
     {
@@ -55,11 +61,15 @@ public class GameManager : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         DisplayRoomInfo();
+        string msg = $"<color=#00ff00>[{newPlayer.NickName}]</color>님이 입장하셨습니다.";
+        ChatMessage(msg);
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         DisplayRoomInfo();
+        string msg = $"<color=#ff0000>[{otherPlayer.NickName}]</color>님이 퇴장하셨습니다.";
+        ChatMessage(msg);
     }
 
 
