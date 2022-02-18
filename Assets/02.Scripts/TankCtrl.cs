@@ -29,6 +29,9 @@ public class TankCtrl : MonoBehaviour
     private float initHp = 100.0f;  //초기 생명수치
     private float currHp = 100.0f;  //현재 HP
 
+    // 탱크의 모든 MeshRenderer 컴퍼넌트를 저장
+    private MeshRenderer[] renderers;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +40,7 @@ public class TankCtrl : MonoBehaviour
         tr = GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
         audio = GetComponent<AudioSource>();
+        renderers = GetComponentsInChildren<MeshRenderer>();
 
         if (pv.IsMine)
         {
@@ -94,6 +98,35 @@ public class TankCtrl : MonoBehaviour
         {
             currHp -= 20.0f;
             hpBar.fillAmount = currHp / initHp;
+
+            if (currHp <= 0.0f)
+            {
+                TankDestroy();
+            }
+        }
+    }
+
+    void TankDestroy()
+    {
+        // 탱크를 Invisible
+        SetVisible(false);
+        Invoke("RespwanTank", 3.0f);
+    }
+
+    void RespwanTank()
+    {
+        currHp = initHp;
+
+        // 랜덤한 좌표이동 로직
+
+        SetVisible(true);
+    }
+
+    void SetVisible(bool isVisible)
+    {
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            renderers[i].enabled = isVisible;
         }
     }
 }
