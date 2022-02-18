@@ -99,5 +99,13 @@ public class GameManager : MonoBehaviourPunCallbacks
         ChatMessage(msg);
     }
 
+    public override void OnMasterClientSwitched(Player newMasterClient)
+    {
+        if (pv.Owner.ActorNumber == newMasterClient.ActorNumber)
+        {
+            Debug.Log("방장 승계됨");
+            this.SendMessage($"<color=#ffff00>[{pv.Owner.NickName}]</color>님이 방장이 됐습니다.");
+        }
+    }
 
 }
