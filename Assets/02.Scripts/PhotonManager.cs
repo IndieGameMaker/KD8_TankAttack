@@ -89,7 +89,26 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     #region UI_CALLBACK
     public void OnLoginButtonClick()
     {
+        SetUserId();
         PhotonNetwork.JoinRandomRoom();
     }
+    #endregion
+
+    #region USER_DIFINE_FUNC
+
+    void SetUserId()
+    {
+        if (string.IsNullOrEmpty(userId_IF.text))
+        {
+            userId = $"USER_{Random.Range(0, 1000):0000}";
+            userId_IF.text = userId;
+        }
+        userId = userId_IF.text;
+
+        // PlayerPrefs 사용해서 UserId를 저장
+        PlayerPrefs.SetString("USER_ID", userId);
+        PhotonNetwork.NickName = userId;
+    }
+
     #endregion
 }
