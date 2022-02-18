@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviourPunCallbacks
                                   pos,
                                   Quaternion.identity,
                                   0);
+
+        DisplayRoomInfo();
     }
 
     void DisplayRoomInfo()
@@ -30,7 +32,22 @@ public class GameManager : MonoBehaviourPunCallbacks
         Room currentRoom = PhotonNetwork.CurrentRoom;
 
         string msg = $"{currentRoom.Name} (<color=#ff0000>{currentRoom.PlayerCount}</color>/<color=#00ff00>{currentRoom.MaxPlayers}</color>)";
+        roomInfo.text = msg;
 
-        roomInfo.text =
+        // string msg1 = $"[0] (<color=#ff0000>[1]</color>/<color=#00ff00>[2]</color>)";
+        // roomInfo.text = string.Format(msg,
+        //                               currentRoom.Name,
+        //                               currentRoom.PlayerCount,
+        //                               currentRoom.MaxPlayers);
+    }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        DisplayRoomInfo();
+    }
+
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        DisplayRoomInfo();
     }
 }
