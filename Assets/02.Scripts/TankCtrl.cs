@@ -116,6 +116,7 @@ public class TankCtrl : MonoBehaviour
     void RespwanTank()
     {
         currHp = initHp;
+        hpBar.fillAmount = 1.0f;
 
         // 랜덤한 좌표이동 로직
 
@@ -128,5 +129,8 @@ public class TankCtrl : MonoBehaviour
         {
             renderers[i].enabled = isVisible;
         }
+
+        tr.Find("Canvas").gameObject.SetActive(isVisible);
+        //tr.Find("Canvas").GetComponent<Canvas>().enabled = isVisible;
     }
 }
