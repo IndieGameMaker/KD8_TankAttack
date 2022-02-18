@@ -31,6 +31,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         PhotonNetwork.ConnectUsingSettings();
     }
 
+    #region PUN_CALLBACK
+
     // 포톤 서버(클라우드)에 접속했을 때 호출되는 콜백
     public override void OnConnectedToMaster()
     {
@@ -46,7 +48,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         Debug.Log("로비에 입장");
 
         // 랜덤한 방에 입장 요청
-        PhotonNetwork.JoinRandomRoom();
+        // PhotonNetwork.JoinRandomRoom();
     }
 
     // 랜덤조인 실패했을 때 호출되는 콜백
@@ -87,5 +89,12 @@ public class PhotonManager : MonoBehaviourPunCallbacks
                                   Quaternion.identity,
                                   0);
     }
+    #endregion
 
+    #region UI_CALLBACK
+    public void OnLoginButtonClick()
+    {
+        PhotonNetwork.JoinRandomRoom();
+    }
+    #endregion
 }
