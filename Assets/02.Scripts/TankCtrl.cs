@@ -66,7 +66,12 @@ public class TankCtrl : MonoBehaviour
         {
             Move();
 
-            if (Input.GetMouseButtonDown(0))
+            // if (!UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
+            // {
+            //     pv.RPC("Fire", RpcTarget.AllViaServer, pv.Owner.ActorNumber);
+            // }
+
+            if (IgnoreUI.isMouseOverUI == false && Input.GetMouseButtonDown(0))
             {
                 // Fire(); // 일반함수로 호출
                 // RPC 호출
