@@ -41,6 +41,17 @@ public class GameManager : MonoBehaviourPunCallbacks
         //                               currentRoom.MaxPlayers);
     }
 
+    public void OnExitButtonClick()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+
+    // Client's Object Cleanup 호출되는 콜백
+    public override void OnLeftRoom()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Lobby");
+    }
+
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         DisplayRoomInfo();
@@ -50,4 +61,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         DisplayRoomInfo();
     }
+
+
 }
