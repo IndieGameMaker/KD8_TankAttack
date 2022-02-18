@@ -43,6 +43,8 @@ public class TankCtrl : MonoBehaviour
             rb.isKinematic = true;
         }
 
+        // 자신의 NickName 표기
+        userId.text = pv.Owner.NickName;
     }
 
     // Update is called once per frame
