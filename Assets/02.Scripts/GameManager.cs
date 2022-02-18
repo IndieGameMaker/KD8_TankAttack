@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         foreach (var player in PhotonNetwork.PlayerList)
         {
             string color = (player.IsMasterClient) ? "#ff0000" : "#00ff00";
-            strPlayers += $"<color={color}>{player.NickName}</color>";
+            strPlayers += $"<color={color}>{player.NickName}</color>\n";
         }
 
         playerList.text = strPlayers;
