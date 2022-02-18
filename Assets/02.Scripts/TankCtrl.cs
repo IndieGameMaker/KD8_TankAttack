@@ -112,6 +112,7 @@ public class TankCtrl : MonoBehaviour
                 if (pv.IsMine)
                 {
                     string msg = $"<color=#00ff00>[{pv.Owner.NickName}]</color> 님이 <color=#ff0000>[{shooter.NickName}]</color>에게 살해 당했습니다.";
+                    GameManager.instance.SendMessage(msg);
                 }
 
                 TankDestroy();

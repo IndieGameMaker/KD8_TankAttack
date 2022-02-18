@@ -10,7 +10,16 @@ public class GameManager : MonoBehaviourPunCallbacks
     public TMP_Text roomInfo;
     public TMP_Text chatMsgList;
     public TMP_InputField msg_IF;
-    private PhotonView pv;
+
+    [System.NonSerialized]
+    public PhotonView pv;
+
+    public static GameManager instance = null;
+
+    void Awake()
+    {
+        instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +66,11 @@ public class GameManager : MonoBehaviourPunCallbacks
         pv.RPC("ChatMessage", RpcTarget.AllBufferedViaServer, msg);
 
         msg_IF.text = "";
+    }
+
+    public new void SendMessage(string msg)
+    {
+        pv.RPC("ChatMessage", RpcTarget.AllBufferedViaServer, msg);
     }
 
     [PunRPC]
