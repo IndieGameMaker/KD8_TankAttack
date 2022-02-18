@@ -6,6 +6,8 @@ public class Cannon : MonoBehaviour
 {
     public GameObject expEffect;
     public float speed = 2000.0f;
+    // Shooter ID
+    public int shooterId;
 
     void Start()
     {

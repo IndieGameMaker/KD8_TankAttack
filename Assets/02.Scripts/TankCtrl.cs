@@ -3,7 +3,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 using Photon.Pun;
+using Photon.Realtime;
+
 using Cinemachine;
 using TMPro;
 using UnityEngine.UI;
@@ -67,7 +70,7 @@ public class TankCtrl : MonoBehaviour
             {
                 // Fire(); // 일반함수로 호출
                 // RPC 호출
-                pv.RPC("Fire", RpcTarget.AllViaServer);
+                pv.RPC("Fire", RpcTarget.AllViaServer, pv.Owner.ActorNumber);
             }
         }
     }
@@ -80,15 +83,15 @@ public class TankCtrl : MonoBehaviour
 
     /*
         RPC (Remote Procedure Call) , RMI (Remote Method Invoke)
-    
     */
 
     [PunRPC]
-    void Fire()
+    void Fire(int shooterId)
     {
         audio.PlayOneShot(fireSfx, 0.8f);
 
         var obj = Instantiate(cannon, firePos.position, firePos.rotation);
+        obj.GetComponent<Cannon>().shooterId = shooterId;
         Destroy(obj, 5.0f);
     }
 
@@ -99,8 +102,18 @@ public class TankCtrl : MonoBehaviour
             currHp -= 20.0f;
             hpBar.fillAmount = currHp / initHp;
 
+            // ActorNumber(shooterId) -> NickName
+            int shooterId = coll.gameObject.GetComponent<Cannon>().shooterId;
+            Player shooter = PhotonNetwork.CurrentRoom.GetPlayer(shooterId);
+
+
             if (currHp <= 0.0f)
             {
+                if (pv.IsMine)
+                {
+                    string msg = $"<color=#00ff00>[{pv.Owner.NickName}]</color> 님이 <color=#ff0000>[{shooter.NickName}]</color>에게 살해 당했습니다.";
+                }
+
                 TankDestroy();
             }
         }
