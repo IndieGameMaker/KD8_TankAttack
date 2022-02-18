@@ -14,9 +14,11 @@ public class Cannon : MonoBehaviour
 
     void OnCollisionEnter()
     {
+        Quaternion rot = Quaternion.Euler(Vector3.up * Random.Range(0, 360));
+
         GameObject obj = Instantiate(expEffect,
                                      transform.position,
-                                     Quaternion.identity);
+                                     rot);
 
         Destroy(obj, 5.0f);
 
