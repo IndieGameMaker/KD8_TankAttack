@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Cinemachine;
+using TMPro;
 
 public class TankCtrl : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class TankCtrl : MonoBehaviour
     public GameObject cannon;
     public Transform firePos;
     public AudioClip fireSfx;
+    public TMP_Text userId;
 
     // Start is called before the first frame update
     void Start()
