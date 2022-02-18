@@ -9,10 +9,14 @@ public class GameManager : MonoBehaviourPunCallbacks
 {
     public TMP_Text roomInfo;
     public TMP_Text chatMsgList;
+    public TMP_InputField msg_IF;
+    private PhotonView pv;
 
     // Start is called before the first frame update
     void Start()
     {
+        pv = GetComponent<PhotonView>();
+
         List<Transform> points = new List<Transform>();
         GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>(points);
 
@@ -47,6 +51,13 @@ public class GameManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LeaveRoom();
     }
 
+    public void OnSendButtonClick()
+    {
+        string msg = $"<color=#00ff00>[{PhotonNetwork.NickName}]</color> {msg_IF.text}";
+        pv.RPC("ChatMessage", RpcTarget.AllBufferedViaServer, msg);
+    }
+
+    [PunRPC]
     public void ChatMessage(string msg)
     {
         chatMsgList.text += msg + "\n";
