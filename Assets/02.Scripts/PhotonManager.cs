@@ -77,17 +77,12 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("방 입장 완료 !!!");
 
-        List<Transform> points = new List<Transform>();
-        GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>(points);
-
-        int idx = Random.Range(1, points.Count);
-
-        Vector3 pos = points[idx].position;
-
-        PhotonNetwork.Instantiate("Tank",
-                                  pos,
-                                  Quaternion.identity,
-                                  0);
+        // BattleField 씬으로 전환(씬 로딩)
+        if (PhotonNetwork.IsMasterClient)
+        {
+            //SceneManagements.SceneManager.LoadScene
+            PhotonNetwork.LoadLevel("BattleField");
+        }
     }
     #endregion
 
