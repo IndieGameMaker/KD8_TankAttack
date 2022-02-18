@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public TMP_Text roomInfo;
     public TMP_Text chatMsgList;
     public TMP_InputField msg_IF;
+    public TMP_Text playerList;
 
     [System.NonSerialized]
     public PhotonView pv;
@@ -56,6 +57,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             strPlayers += $"<color={color}>{player.NickName}</color>";
         }
 
+        playerList.text = strPlayers;
 
         // string msg1 = $"[0] (<color=#ff0000>[1]</color>/<color=#00ff00>[2]</color>)";
         // roomInfo.text = string.Format(msg,
