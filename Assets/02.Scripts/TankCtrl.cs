@@ -6,6 +6,7 @@ using UnityEngine;
 using Photon.Pun;
 using Cinemachine;
 using TMPro;
+using UnityEngine.UI;
 
 public class TankCtrl : MonoBehaviour
 {
@@ -23,6 +24,10 @@ public class TankCtrl : MonoBehaviour
     public Transform firePos;
     public AudioClip fireSfx;
     public TMP_Text userId;
+    public Image hpBar;
+
+    private float initHp = 100.0f;  //초기 생명수치
+    private float currHp = 100.0f;  //현재 HP
 
     // Start is called before the first frame update
     void Start()
@@ -81,5 +86,14 @@ public class TankCtrl : MonoBehaviour
 
         var obj = Instantiate(cannon, firePos.position, firePos.rotation);
         Destroy(obj, 5.0f);
+    }
+
+    void OnCollisionEnter(Collision coll)
+    {
+        if (coll.collider.CompareTag("CANNON"))
+        {
+            currHp -= 20.0f;
+            hpBar.fillAmount = currHp / initHp;
+        }
     }
 }
