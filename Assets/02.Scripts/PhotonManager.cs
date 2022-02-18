@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using TMPro;
 
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
@@ -12,6 +13,10 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     private readonly string gameVersion = "1.0";
     // 유저명
     public string userId = "LeeJaeHyun";
+
+    // UserID, Room Name InputField
+    public TMP_InputField userId_IF;
+    public TMP_InputField roomName_IF;
 
     void Awake()
     {
