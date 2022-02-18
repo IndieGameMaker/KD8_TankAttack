@@ -48,6 +48,15 @@ public class GameManager : MonoBehaviourPunCallbacks
         string msg = $"{currentRoom.Name} (<color=#ff0000>{currentRoom.PlayerCount}</color>/<color=#00ff00>{currentRoom.MaxPlayers}</color>)";
         roomInfo.text = msg;
 
+        string strPlayers = "";
+
+        foreach (var player in PhotonNetwork.PlayerList)
+        {
+            string color = (player.IsMasterClient) ? "#ff0000" : "#00ff00";
+            strPlayers += $"<color={color}>{player.NickName}</color>";
+        }
+
+
         // string msg1 = $"[0] (<color=#ff0000>[1]</color>/<color=#00ff00>[2]</color>)";
         // roomInfo.text = string.Format(msg,
         //                               currentRoom.Name,
