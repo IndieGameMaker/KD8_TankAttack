@@ -127,13 +127,17 @@ public class PhotonManager : MonoBehaviourPunCallbacks
                     // Room 프리팹 생성
                     GameObject _room = Instantiate(roomPrefab, contentTr);
                     // 룸 정보 설정
-
+                    _room.GetComponent<RoomData>().RoomInfo = room;
                     // 딕셔너리에 룸 추가
                     roomDict.Add(room.Name, _room);
                 }
                 else
                 {
                     // 룸 정보 갱신 로직
+                    if (roomDict.TryGetValue(room.Name, out tempRoom))
+                    {
+                        tempRoom.GetComponent<RoomData>().RoomInfo = room;
+                    }
                 }
             }
 
