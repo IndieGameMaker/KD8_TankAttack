@@ -117,6 +117,9 @@ public class PhotonManager : MonoBehaviourPunCallbacks
                 if (roomDict.TryGetValue(room.Name, out tempRoom))
                 {
                     // 삭제 로직
+                    Destroy(tempRoom);
+                    // 딕셔너리 데이터 삭제
+                    roomDict.Remove(room.Name);
                 }
             }
             else // 룸이 처음 생성됐거나 갱신될 룸
