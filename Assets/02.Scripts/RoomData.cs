@@ -10,6 +10,11 @@ public class RoomData : MonoBehaviour
     public TMP_Text roomText;
     private RoomInfo roomInfo;
 
+    void Start()
+    {
+        roomText = GetComponentInChildren<TMP_Text>();
+    }
+
     // 프로퍼티 정의
     public RoomInfo RoomInfo
     {
