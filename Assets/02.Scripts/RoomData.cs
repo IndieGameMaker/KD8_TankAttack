@@ -29,8 +29,29 @@ public class RoomData : MonoBehaviour
             roomInfo = value;
             // 룸 정보 표시
             roomText.text = $"{roomInfo.Name} ({roomInfo.PlayerCount}/{roomInfo.MaxPlayers})";
+
+            // 버튼 클릭시 호출할 이벤트를 연결
+            // 1. 델리게이트
+            // 2. 람다식
+            GetComponent<UnityEngine.UI.Button>().onClick.AddListener(
+                delegate ()
+                {
+                    OnEnterRoom(roomInfo.Name);
+                }
+            );
         }
     }
 
+    void OnEnterRoom(string roomName)
+    {
+        // 룸 속성 정의
+        // RoomOptions ro = new RoomOptions();
+        // ro.IsOpen = true;
+        // ro.IsVisible = true;
+        // ro.MaxPlayers = 20;
 
+        // PhotonNetwork.JoinOrCreateRoom(roomName, ro, TypedLobby.Default);
+
+        PhotonNetwork.JoinRoom(roomName);
+    }
 }
