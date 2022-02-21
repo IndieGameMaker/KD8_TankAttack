@@ -10,7 +10,7 @@ public class RoomData : MonoBehaviour
     public TMP_Text roomText;
     private RoomInfo roomInfo;
 
-    void Start()
+    void Awake()
     {
         roomText = GetComponentInChildren<TMP_Text>();
     }
