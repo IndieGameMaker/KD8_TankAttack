@@ -97,6 +97,19 @@ public class PhotonManager : MonoBehaviourPunCallbacks
             PhotonNetwork.LoadLevel("BattleField");
         }
     }
+
+    public GameObject roomPrefab;
+    public Transform contentTr;  // 차일드화 시킬 부모의 Transform
+
+    // 룸 목록이 변경됐을 때마다 호출되는 콜백
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    {
+        foreach (var room in roomList)
+        {
+            Debug.Log(room.Name + " " + room.PlayerCount);
+        }
+    }
+
     #endregion
 
     #region UI_CALLBACK
