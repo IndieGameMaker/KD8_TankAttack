@@ -100,13 +100,43 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     public GameObject roomPrefab;
     public Transform contentTr;  // 차일드화 시킬 부모의 Transform
+    // 룸 목록을 저장할 Dictionary 생성
+    public Dictionary<string, GameObject> roomDict = new Dictionary<string, GameObject>();
 
     // 룸 목록이 변경됐을 때마다 호출되는 콜백
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
+        GameObject tempRoom = null;
+
         foreach (var room in roomList)
         {
             Debug.Log(room.Name + " " + room.PlayerCount);
+
+            if (room.RemovedFromList == true) // 룸 삭제 여부
+            {
+                if (roomDict.TryGetValue(room.Name, out tempRoom))
+                {
+                    // 삭제 로직
+                }
+            }
+            else // 룸이 처음 생성됐거나 갱신될 룸
+            {
+                // 처음 생성하는 룸
+                if (roomDict.ContainsKey(room.Name) == false)
+                {
+                    // Room 프리팹 생성
+                    GameObject _room = Instantiate(roomPrefab, contentTr);
+                    // 룸 정보 설정
+
+                    // 딕셔너리에 룸 추가
+                    roomDict.Add(room.Name, _room);
+                }
+                else
+                {
+                    // 룸 정보 갱신 로직
+                }
+            }
+
         }
     }
 
