@@ -33,11 +33,16 @@ public class RoomData : MonoBehaviour
             // 버튼 클릭시 호출할 이벤트를 연결
             // 1. 델리게이트
             // 2. 람다식
+            // GetComponent<UnityEngine.UI.Button>().onClick.AddListener(
+            //     delegate ()
+            //     {
+            //         OnEnterRoom(roomInfo.Name);
+            //     }
+            // );
+
+            // Goes To
             GetComponent<UnityEngine.UI.Button>().onClick.AddListener(
-                delegate ()
-                {
-                    OnEnterRoom(roomInfo.Name);
-                }
+                () => OnEnterRoom(roomInfo.Name)
             );
         }
     }
